@@ -302,9 +302,10 @@ As _xor_key_ also has those features, the encoded path must have the two first f
 where aa, bb, cc, dd, ee, ff, gg, hh values are in 00-7f range and the other _bytes_ are 00.
 
 As each move adds 2 _bits_ into the encoded path, each _byte_ represents 4 moves and the expected path has 64 moves.
-As the odd-index _bytes_ (first index is zero) are 00, 4 random moves are followed and follow 4 moves to the right (0 is the argument to _update_obj_, when the right arrow key is pressed).
+As the odd-index _bytes_ (first index is zero) are 00, 4 arbitrary moves are followed and follow 4 moves to the right (0 is the argument to _update_obj_, when the right arrow key is pressed).
 
-All thoses constraints were expressed in the Python _script_ in snippet 7.
+All those constraints reduce the space of possible paths in the maze between the initial and the target positions, making feasible list all encoded paths meeting them.
+They were expressed in the Python _script_ in snippet 7.
 lab.txt content is presented in snippet 8.
 
 ```python

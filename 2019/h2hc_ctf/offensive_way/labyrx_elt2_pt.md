@@ -307,7 +307,7 @@ onde aa, bb, cc, dd, ee, ff, gg, hh estão no intervalo 00-7f e os outros _bytes
 Como cada movimento concatena 2 _bits_ no caminho codificado, cada _byte_ representa 4 movimentos e o caminho esperado é composto por 64 movimentos.
 Como os _bytes_ em índices ímpares (o primeiro índice é zero) são 00, 4 movimentos aleatórios são alternados com 4 movimentos à direita (0 é o argumento passado à função _update_obj_, quando se pressiona a seta à direita).
 
-As restrições relacionadas ao tamanho e ao formato foram expressas no _script_ em Python do código 7.
+As restrições relacionadas ao tamanho e ao formato reduzem o espaço de possíveis caminhos no labirinto entre as posições inicial e de destino e tornam possível listar todos os caminhos codificados as satisfazendo. Elas foram expressas no _script_ em Python do código 7.
 O conteúdo do arquivo lab.txt é apresentado no código 8.
 
 ```python
