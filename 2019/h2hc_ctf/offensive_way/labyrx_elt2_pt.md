@@ -14,7 +14,7 @@ Nós recebemos o arquivo LabyrX.exe, um binário **PE**, com as seguintes caract
 
 A primeira abordagem foi realizar análise dinâmica para entender o funcionamento do programa.
 Ao executar o programa, uma pequena janela é aberta. 
-A figura 1 apresenta essa janela. 
+A figura 2 apresenta essa janela. 
 Nós testamos interagir com a janela usando o teclado e percebemos alguns detalhes.
 A tecla **R** recarregava a imagem da janela e as setas do teclado também pareciam interagir, mas não estava evidente quais eventos elas provocavam.
 
