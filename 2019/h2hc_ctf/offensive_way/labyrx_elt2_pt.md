@@ -1,6 +1,6 @@
 # LabyrX
 
-Obs: Esta solução foi desenvolvida pelo time ELT2.
+Obs: Esta solução foi desenvolvida pelo time ELT2 (dayrell, g3ol4do, Manoel e n0ps13d).
 
 ## Introdução do desafio
 
