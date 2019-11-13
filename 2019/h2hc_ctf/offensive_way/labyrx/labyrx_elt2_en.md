@@ -1,6 +1,6 @@
 # LabyrX
 
-Obs: ELT2 team (dayrell, g3ol4do, Manoel e n0ps13d) solution.
+Obs: ELT2 team (dayrell, g3ol4d0, Manoel e n0ps13d) solution.
 
 ## Challenge introduction
 
