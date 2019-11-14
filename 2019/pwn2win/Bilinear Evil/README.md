@@ -4,6 +4,18 @@ Challenge author: Diego Aranha (@dfaranha)
 
 The challenge provides two files: chall.sage and data.txt.
 
+### Description:
+
+We know that HARPA is creating a cryptosystem which contains a backdoor. Their plan is to force the users to use this system in their "end-to-end secure instant message applications".
+
+**Id**: bilinear_evil
+
+**Total solves:** 0
+
+**Score:** 500
+
+**Categories:** Cryptography
+
 ### chall.sage
 
 ```
