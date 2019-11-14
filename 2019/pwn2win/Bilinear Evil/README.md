@@ -121,4 +121,4 @@ print msk;
 print sk eq g^msk;
 ```
 
-After about 25 minutes running on one core i7-4770 CPU @ 3.40GHz and consuming no more than 3GB of RAM, it prints the msk result ```115446939500666899985780993136262```. Converting the bytes to ASCII, and as per the prefix and suffix shown in the sage code, the flag is ```CTF-BR{pa1r__1s_4_f3w}```.
+After about 25 minutes running on one core i7-4770 CPU @ 3.40GHz and consuming no more than 3GB of RAM, it prints the msk result ```2279330310406276230060786764362615```. Converting the bytes to ASCII, and as per the prefix and suffix shown in the sage code, the flag is ```CTF-BR{pa1r__1s_4_f3w}```.
