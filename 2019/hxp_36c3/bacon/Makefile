@@ -1,6 +1,7 @@
 CXXFLAGS = -Wall -Werror -fopenmp -Ofast -march=native
 LIBS = -lbsd
-brute: brute.cpp
+all: brute meet
+%: %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS)
 clean:
 	rm -f brute

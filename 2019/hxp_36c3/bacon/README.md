@@ -62,3 +62,19 @@ H(b'd88b2937f5f399b0f9') = b'7af4825f30f2'
 [*] Closed connection to 78.47.89.248 port 1952
 b'The flag is: hxp{7h3Y_f1n4Lly_m4d3_a_t0Y_c1ph3R_f0r_CTF_Ta5kz}\n'
 ```
+
+## Meet in the middle
+
+Later we realized it would have been better to try messages consisting of two blocks (18 bytes), for which the hash computations can be simplified as follows:
+
+`H(m) == Speck(len(m), Speck(m[9:], Speck(m[:9], 0)))`
+
+Applying the decryption function two times, we get:
+
+`InvSpeck(m[9:], InvSpeck(len(m), H(m))) == Speck(m[:9], 0)`
+
+We can thus precompute several values of the left hand side, each for a different value of `m[9:]`, i.e., a meet in the middle attack.
+
+If we precompute the left hand side for `n` different values of `m[9:]` and store the results in a map, each trial at a value for `m[:9]` will effectively evaluate `n` hashes, for a computational cost of at most `O(log n)`.
+
+This technique is implemented in [meet.cpp](meet.cpp). It is able to complete in only 10 seconds when running in a dual core laptop.
