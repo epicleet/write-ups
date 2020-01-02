@@ -26,7 +26,7 @@ All cmake source code variable names were obfuscated. All of the source code was
 
 ## Solution
 
-The VM code implemented on Python was reused to find out the expected string using Z3. However, there was a caveat while executing function `V()`. As the function seems to execute integer division between its arguments, its code was properly updated and the [solve.py](script) worked.
+The VM code implemented on Python was reused to find out the expected string using Z3. However, there was a caveat while executing function `V()`. As the function seems to execute integer division between its arguments, its code was properly updated and the [script](solve.py) worked.
 
 Running the script returns the expected password to build the C project: `>@PJ(2{i2up8xmZe`. This string was put in `password.txt` file, the cmake build commands worked and we got the flag.
 
