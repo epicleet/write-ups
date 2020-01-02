@@ -1,10 +1,13 @@
-# DIY pinter
+# DIY printer
 
 I found some source code for a do-it-yourself flag printer but it looks like it only builds using this weird cmake source. I tried everything I could think of, i.e.
 
+```
 mkdir build
 cd build
 cmake ..
+```
+
 but it didn’t work :( I never understood that build system stuff so can you please help me out?
 
 (You should be able to safely ignore the *.h and *.c files — they are just to print the flag when you succeed.)
