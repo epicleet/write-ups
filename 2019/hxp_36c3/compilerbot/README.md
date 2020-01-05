@@ -35,7 +35,19 @@ Now there is a trick to [stringify](https://gcc.gnu.org/onlinedocs/gcc-4.8.5/cpp
 #define str(x) %:x
 #define hxp str(
 ```
-When the preprocessor find `hxp` it will replace with `str(` and interpret everything inside `str(` as a string. Phew, almost there.
+When the preprocessor find `hxp` it will replace with `str(` and interpret everything inside `str(` as a string. Example:
+```
+include "flag"
+```
+will be replaced with:
+```
+hxp{something here}
+```
+And this will turn into:
+```
+str(somthing here}
+```
+We can close `)` and the contents inside the round brackets will be interpreted as a string by the compiler. Our problem can now be solved using _Static_assert directive, comparing strings in the preprocessor, as described above.
 
 Now we just need to put our defines outside the main function, to do this we just close the main and start another function with any name with our _Static_assert inside this function.
 ```
@@ -67,7 +79,24 @@ Our final payload would look like this.
 **Note:** the string comparison is made in hex, because tha chars `{`, `}` are replaced.
 **Note:** the first `%>` is closing main
 
-We made a [script](compilerbot.py) to bruteforce the flag.
+We have our payload, and now? Let's use it to bruteforce character by character, to do this we made a [script](compilerbot.py).
 
+# Bruteforce Script
 
+The [script](compilerbot.py) do the following steps:
+
+* let `char_list` be a list of all possible characters
+* let `n` be the size of the flag
+* let `flag` be the string of already discovered characters
+* While "}" not in flag (the flag doesn't have reached the end)
+  * for each character `c` in our `char_list`
+    * Create a payload (described above) with the `flag` plus `c` (the next character that we are trying to discover) comparing the first `n` bytes
+    * if the server responded without an error, we found the next character in sequence
+        * add `c` in `flag`
+    * if the server responded with an error
+        * We do nothing, because the character is not the next in sequence 
+
+**Note:** Since the following characters are replaced `{`,`}` we make a comparison in `strncmp` using the hex representation. This is why `flag.encode('ascii')` is necessary
+
+`{Cl4n6_15_c00l_bu7_y0u_r34lly_0u6h7_70_7ry_gcc_-traditional-cpp_s0m3_d4y}`
 
