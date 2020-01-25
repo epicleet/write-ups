@@ -75,7 +75,7 @@ At program end the resulting numbers are written in the data file given in rever
   free(cfile);
 ```
 
-Now we understand the binary it is important to remember that when we sum and subtract two integer numbers, both results have sme parity, so iterating from end to beginning, the unique pair with two distinct parities are the wrong one and the element of odd index must be changed. 
+Now we understand the binary it is important to remember that when we sum and subtract two integer numbers, both results have same parity, so iterating from end to beginning, the unique pair with two distinct parities are the wrong one and the element of odd index must be changed. 
 
 There are two ways to identify where to stop iterating:
 
