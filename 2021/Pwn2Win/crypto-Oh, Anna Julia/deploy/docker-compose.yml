@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+    pwn:
+        image: registry.gitlab.com/pwn2win/pwn2win-2021/deploy-crypto-oh-anna-julia:latest
+        ports:
+            - "1337:8888"
+        expose:
+            - "8888"
+        pids_limit: 1024
+        restart: unless-stopped
