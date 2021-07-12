@@ -1,14 +1,13 @@
-Challenge
-===
+# GutHib
+
+## Challenge
 
 What happens on GutHib, stays on GutHib.
 
 repo: [awesome-ctf/TCTF2021-Guthib](https://github.com/awesome-ctf/TCTF2021-Guthib)
 
 
-
-Solution
-===
+## Solution
 
 The challenge shows a repository where the author seemingly checked in a secret and later removed it using [bfg](https://rtyley.github.io/bfg-repo-cleaner/) + force push.
 
