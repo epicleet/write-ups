@@ -1,5 +1,7 @@
 # ASIS CTF 2021 - DamaS writeup
 
+**Wrote by:** c4v0k
+
 ## tl;dr
 
 Use Boneh-Durfee with m=12 and delta=0.28 to recover the secret key (despite nothing in the chall indicating that is the right way to go)
