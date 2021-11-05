@@ -1,6 +1,6 @@
 # ASIS CTF 2021 - DamaS writeup
 
-**Wrote by:** c4v0k
+**Wrote by:** [c4v0k](https://github.com/thalestvba/write-ups)
 
 ## tl;dr
 
