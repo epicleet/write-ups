@@ -7,7 +7,7 @@ Qiling is a python sandbox that, among other things, locks the program in a dire
 a similar way a chroot does. It implements wrappers on pretty much every syscall and resolves
 the real path before passing them to the system by prepending the the directory we are supposed
 to be locked on to every syscall that accesses the file system. For example,
-execve("/readflag",0,0) would become execve("<Qiling-rootfs>/readflag",0,0) before being
+`execve("/readflag",0,0)` would become `execve("<Qiling-rootfs>/readflag",0,0)` before being
 invoked. The two functions used to switch between the real path of a file in the system and the
 relative paths inside the sandboxed directory are `transform_to_real_path` and
 `transform_to_relative_path`:
