@@ -47,7 +47,7 @@ qiling/os/path.py
 ```
 
 
-Our first idea was to bypass `transform_to_real_path` using symlinks. If _real\_path_ pointed to `/readflag`, we could `execve` and win. The `normalize` function has no vulnerabilities apparently, but we can use symlink to bypass references:
+Our first idea was to bypass `transform_to_real_path` using symlinks. If _real\_path_ pointed to `/readflag`, we could `execve` and win. The `normalize` function has no vulnerabilities, apparently, but we could try to use symlink to bypass references:
 
 ```py
 # /symlink  -> ../../../etc/passwd
@@ -66,11 +66,11 @@ if os.path.islink(real_path):
         real_path = Path(os.path.join(os.path.dirname(real_path), link_path))
 ```
 
-Now if we read (or exec :D) this _real\_path_ it will point to `/etc/passwd`, but in the test of that:
+Now if we read (or exec :D) this _real\_path_ it will hopefully point to `/etc/passwd`, but unfortunately:
 
 ![](https://i.ibb.co/fGK72GD/symlink.png)
 
-> It's not possible to use symlinks to escape as the syscall is not implemented.
+> It's not possible to use symlinks to escape as the syscall is not implemented :(
 
 
 With our fist option failed we started looking for bugs again and found one that happened due to a syscall wrapper not converting the paths before calling
