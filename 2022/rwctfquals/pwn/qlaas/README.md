@@ -66,7 +66,6 @@ if os.path.islink(real_path):
         real_path = Path(os.path.join(os.path.dirname(real_path), link_path))
 ```
 
-<!-- Now, if we read(or exec :D) this _real\_path_, he point to `/etc/passwd`, but in the test of it: -->
 Now if we read (or exec :D) this _real\_path_ it will point to `/etc/passwd`, but in the test of that:
 
 ![](https://i.ibb.co/fGK72GD/symlink.png)
