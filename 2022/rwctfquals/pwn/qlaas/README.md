@@ -254,6 +254,8 @@ io.sendline(base64_code)
 io.interactive()
 ```
 
+FLAG: `rwctf{s0-many-vu1n_but-only-few-exploitable}`
+
 - 0xTen
 - Caue
 - Esoj
