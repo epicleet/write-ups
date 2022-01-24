@@ -46,6 +46,34 @@ qiling/os/path.py
         return str(Path(self.cwd) / path)
 ```
 
+
+First idea is bypass this `transform_to_real_path`, if _real\_path_ target to `/readflag` on `execve`, we win. The `normalize` function has no vulnerabilities apparently, but we can use symlink to bypass references:
+
+```py
+# /symlink  -> ../../../etc/passwd
+
+# convert_path("/symlink") -> /<Qiling-rootfs>/symlink
+real_path = self.convert_path(self.ql.rootfs, self.cwd, path)
+
+# if "/<Qiling-rootfs>/symlink" is a link, read then
+if os.path.islink(real_path):
+    # link_path = ../../../etc/passwd
+    link_path = Path(os.readlink(real_path))
+
+    if not link_path.is_absolute():
+        # concat real_path + link_path, then:
+        # real_path = /<Qiling-rootfs>/../../../etc/passwd
+        real_path = Path(os.path.join(os.path.dirname(real_path), link_path))
+```
+
+<!-- Now, if we read(or exec :D) this _real\_path_, he point to `/etc/passwd`, but in the test of it: -->
+Now if we read (or exec :D) this _real\_path_ it will point to `/etc/passwd`, but in the test of that:
+
+![](https://i.ibb.co/fGK72GD/symlink.png)
+
+> Not is possible create symlinks.
+
+
 Therefore, the bug we found was due to a syscall wrapper not converting the paths before calling
 the syscall, and that was `openat()`. For some reason the lines that compute the real path and
 the relative path were commented an those weren't used at all, instead, the wrapper simply forwards
