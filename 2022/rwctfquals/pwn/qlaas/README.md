@@ -47,7 +47,7 @@ qiling/os/path.py
 ```
 
 
-First idea is bypass this `transform_to_real_path`, if _real\_path_ target to `/readflag` on `execve`, we win. The `normalize` function has no vulnerabilities apparently, but we can use symlink to bypass references:
+Our first idea was to bypass `transform_to_real_path` using symlinks. If _real\_path_ pointed to `/readflag`, we could `execve` and win. The `normalize` function has no vulnerabilities apparently, but we can use symlink to bypass references:
 
 ```py
 # /symlink  -> ../../../etc/passwd
@@ -70,13 +70,13 @@ Now if we read (or exec :D) this _real\_path_ it will point to `/etc/passwd`, bu
 
 ![](https://i.ibb.co/fGK72GD/symlink.png)
 
-> Not is possible create symlinks.
+> It's not possible to use symlinks to escape as the syscall is not implemented.
 
 
-Therefore, the bug we found was due to a syscall wrapper not converting the paths before calling
+With our fist option failed we started looking for bugs again and found one that happened due to a syscall wrapper not converting the paths before calling
 the syscall, and that was `openat()`. For some reason the lines that compute the real path and
-the relative path were commented an those weren't used at all, instead, the wrapper simply forwards
-whatever path the program tries to access, allowing the program to access files outside the sandboxes
+the relative path were commented out and those weren't used at all, instead, the wrapper simply forwards
+whatever path the program tries to access, allowing the program to access files outside the sandboxe's
 directory and read/write to them.
 
 qiling/os/posix/syscall/fcntl.py
