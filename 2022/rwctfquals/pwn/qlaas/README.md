@@ -76,7 +76,7 @@ Now if we read (or exec :D) this _real\_path_ it will hopefully point to `/etc/p
 With our fist option failed we started looking for bugs again and found one that happened due to a syscall wrapper not converting the paths before calling
 the syscall, and that was `openat()`. For some reason the lines that compute the real path and
 the relative path were commented out and those weren't used at all, instead, the wrapper simply forwards
-whatever path the program tries to access, allowing the program to access files outside the sandboxe's
+whatever path the program tries to access, allowing the program to access files outside the sandbox's
 directory and read/write to them.
 
 qiling/os/posix/syscall/fcntl.py
