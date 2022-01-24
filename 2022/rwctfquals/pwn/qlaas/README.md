@@ -46,7 +46,7 @@ qiling/os/path.py
         return str(Path(self.cwd) / path)
 ```
 
-Therefore, the we found was due to a syscall wrapper not converting the paths before calling
+Therefore, the bug we found was due to a syscall wrapper not converting the paths before calling
 the syscall, and that was `openat()`. For some reason the lines that compute the real path and
 the relative path were commented an those weren't used at all, instead, the wrapper simply forwards
 whatever path the program tries to access, allowing the program to access files outside the sandboxes
