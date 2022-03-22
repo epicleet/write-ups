@@ -50,7 +50,7 @@ where `q0` is the number from which the prime `q` will be found, that is:
 q == q0 + k == ((1<<1024)-1) - p + k
 ```
 
-It is known that `k` is too small since the probability of finding a prime not greater than `N` is `1/ln(N)` as shown in [Wikipedia - Prime Number Theorem](https://en.wikipedia.org/wiki/Prime_number_theorem), so we can search for it linearly. The public key can be written as:
+It is known that `k` is too small since the probability of finding a prime is not greater than `N` is `1/ln(N)` as shown in [Wikipedia - Prime Number Theorem](https://en.wikipedia.org/wiki/Prime_number_theorem), so we can search for it linearly. The public key can be written as:
 
 ```text
 n == p*q == p*(((1<<1024)-1) - p + k)
