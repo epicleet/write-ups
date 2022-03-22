@@ -1,3 +1,11 @@
+The task
+===
+I invented Anti-Fermat Key Generation for RSA cipher since I'm scared of the Fermat's Factorization Method.
+
+Files:
+- [Script](https://github.com/epicleet/write-ups/blob/master/2022/zer0ptsCTF/crypto/anti_fermat/task.py)
+- [Output](https://github.com/epicleet/write-ups/blob/master/2022/zer0ptsCTF/crypto/anti_fermat/output.txt)
+
 Task analysis
 ===
 
