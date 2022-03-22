@@ -55,7 +55,7 @@ Note that the task name is "Anti-Fermat", so in some way it must be related to F
 
 ```text
 n == [((1<<1024)-1 + k)/2 - ((1<<1024)-1 + k)/2 + p]*[((1<<1024)-1 + k)/2 + ((1<<1024)-1 + k)/2 - p]
-n == (a - (((1<<1024)-1 + k)/2 - p))*(a + (((1<<1024)-1 + k)/2 - p))
+n == [a - (((1<<1024)-1 + k)/2 - p)]*[a + (((1<<1024)-1 + k)/2 - p)]
 n == (a - b)*(a + b) == a**2 - b**2
 ```
 where `a == ((1<<1024)-1 + k)/2` and `b == (((1<<1024)-1 + k)/2 - p)` with `k` unknown but small. 
