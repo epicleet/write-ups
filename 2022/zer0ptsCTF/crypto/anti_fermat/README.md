@@ -85,7 +85,7 @@ def FermatFactors(n):
     return a-b, a + b
 ```
 
-So adding the RSA decrypt, we have the full solver:
+So adding the RSA decrypt part, we have the full solver:
 
 ```python
 from math import isqrt
