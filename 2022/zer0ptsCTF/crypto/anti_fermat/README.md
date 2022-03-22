@@ -60,7 +60,7 @@ n == (a - b)*(a + b) == a**2 - b**2
 ```
 where `a == ((1<<1024)-1 + k)/2` and `b == (((1<<1024)-1 + k)/2 - p)` with `k` unknown but small. 
 
-Using an algorithm very similar to that of Fermat we can factorize `n`:
+Using an algorithm very similar to that of Fermat's Factorization Method, we can factorize `n`:
 
 ```python
 from math import isqrt
