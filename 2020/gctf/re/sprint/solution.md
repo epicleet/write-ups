@@ -5,7 +5,7 @@ Points : 173
 
 Sprint faster than this binary!
 
-https://storage.googleapis.com/gctf-2020-attachments-project/c39e555802aa479765c70804396ea5a55ca69583a8de716cc9f03f238a916cb01850b146a0313e9f684c5b86a164498324e42bd17502dea14ad91f1247c660ad
+[sprint](sprint)
 
 ## Solution
 
